@@ -1,9 +1,6 @@
-import React from "react";
-import MyComponent from "../components/my_component";
+import React, { useState } from "react";
 import {
   EuiButton,
-  EuiCode,
-  EuiFlyoutFooter,
   EuiIcon,
   EuiPage,
   EuiPageBody,
@@ -11,45 +8,67 @@ import {
   EuiPageContentBody,
   EuiPageContentHeader,
   EuiPageContentHeaderSection,
-  EuiPageHeader,
-  EuiPageHeaderSection,
   EuiSpacer,
   EuiText,
   EuiTitle,
+  EuiForm,
+  EuiFormRow,
+  EuiFilePicker,
+  EuiSwitch,
 } from "@elastic/eui";
 
-export default () => (
-  <EuiPage restrictWidth>
-    <EuiPageBody>
-      {/*<EuiPageHeader>*/}
-      {/*  <EuiPageHeaderSection>*/}
-      {/*    <EuiTitle size="l">*/}
-      {/*      <h1>Face shaming:)</h1>*/}
-      {/*    </EuiTitle>*/}
-      {/*  </EuiPageHeaderSection>*/}
-      {/*</EuiPageHeader>*/}
-      <EuiPageContent>
-        <EuiPageContentHeader>
-          <EuiPageContentHeaderSection>
-            <EuiTitle>
-              <h2>Chấm điểm khuôn mặt</h2>
-            </EuiTitle>
-          </EuiPageContentHeaderSection>
-          <EuiPageContentHeaderSection />
-        </EuiPageContentHeader>
-        <EuiPageContentBody>
-          <EuiSpacer />
-          <EuiText>
-            <p>
-              <EuiIcon type="alert" /> Dự án có phần <sub>toxic</sub> nhưng mục đích là mang tính
-              vui nhộn, kết quả không mang tính{" "}
-              <span style={{ textDecoration: "line-through" }}>chính xác</span> cũng như không cổ
-              súy face shaming.
-            </p>
-            <p>
-              Database:
-              <pre>
-                {`
+export default () => {
+  const [isBigParent, setIsBigParent] = useState(false);
+
+  return (
+    <EuiPage restrictWidth>
+      <EuiPageBody>
+        <EuiPageContent>
+          <EuiPageContentHeader>
+            <EuiPageContentHeaderSection>
+              <EuiTitle>
+                <h2>Điểm khuôn mặt</h2>
+              </EuiTitle>
+            </EuiPageContentHeaderSection>
+            <EuiPageContentHeaderSection />
+          </EuiPageContentHeader>
+          <EuiPageContentBody>
+            <EuiForm component={"form"}>
+              <EuiFormRow
+                label={"Chọn ảnh"}
+                fullWidth={true}
+                helpText={"Chọn bức ảnh selfie chưa qua chỉnh sửa:)"}>
+                <EuiFilePicker fullWidth={true} initialPromptText={"Nhấn để chọn ảnh"} />
+              </EuiFormRow>
+              <EuiFormRow
+                fullWidth={true}
+                label={"Với tùy chọn này bạn sẽ auto 10 điểm"}
+                hasChildLabel={false}>
+                <EuiSwitch
+                  name={"switch"}
+                  label={"Bố làm to?"}
+                  checked={isBigParent}
+                  onChange={e => {
+                    setIsBigParent(e.target.checked);
+                  }}
+                />
+              </EuiFormRow>
+              <EuiButton type="submit" fill fullWidth={true}>
+                Bắt đầu chấm điểm
+              </EuiButton>
+            </EuiForm>
+            <EuiSpacer />
+            <EuiText>
+              <p>
+                <EuiIcon type="alert" /> Dự án có phần <sub>toxic</sub> nhưng mục đích là mang tính
+                vui nhộn, kết quả không mang tính{" "}
+                <span style={{ textDecoration: "line-through" }}>chính xác</span> cũng như không cổ
+                súy face shaming.
+              </p>
+              <p>
+                Database:
+                <pre>
+                  {`
 @article{liang2017SCUT,
   title     = {SCUT-FBP5500: A Diverse Benchmark Dataset for Multi-Paradigm Facial Beauty Prediction},
   author    = {Liang, Lingyu and Lin, Luojun and Jin, Lianwen and Xie, Duorui and Li, Mengru},
@@ -57,11 +76,12 @@ export default () => (
   year      = {2018}
 }
                 `.trim()}
-              </pre>
-            </p>
-          </EuiText>
-        </EuiPageContentBody>
-      </EuiPageContent>
-    </EuiPageBody>
-  </EuiPage>
-);
+                </pre>
+              </p>
+            </EuiText>
+          </EuiPageContentBody>
+        </EuiPageContent>
+      </EuiPageBody>
+    </EuiPage>
+  );
+};
