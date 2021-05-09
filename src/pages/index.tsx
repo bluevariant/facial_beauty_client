@@ -41,9 +41,10 @@ export default () => (
           <EuiSpacer />
           <EuiText>
             <p>
-              <EuiIcon type="alert" /> Dự án có phần toxic nhưng mục đích là mang tính vui nhộn, kết
-              quả không mang tính <span style={{ textDecoration: "line-through" }}>chính xác</span>{" "}
-              cũng như không cổ súy face shaming.
+              <EuiIcon type="alert" /> Dự án có phần <sub>toxic</sub> nhưng mục đích là mang tính
+              vui nhộn, kết quả không mang tính{" "}
+              <span style={{ textDecoration: "line-through" }}>chính xác</span> cũng như không cổ
+              súy face shaming.
             </p>
             <p>
               Database:
