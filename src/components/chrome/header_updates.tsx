@@ -86,7 +86,7 @@ export default () => {
             </EuiFlexItem>
             <EuiFlexItem grow={false}>
               <EuiText color="subdued" size="s">
-                <p>Version 7.0</p>
+                <p>Version 0.0.1</p>
               </EuiText>
             </EuiFlexItem>
           </EuiFlexGroup>

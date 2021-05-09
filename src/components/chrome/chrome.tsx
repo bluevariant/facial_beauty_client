@@ -4,8 +4,8 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import _ from "lodash";
 
 import {
   EuiPopover,
@@ -24,66 +24,59 @@ import {
   EuiFlexItem,
   EuiHorizontalRule,
   EuiShowFor,
-} from '@elastic/eui';
+} from "@elastic/eui";
 
-import {
-  DeploymentsGroup,
-  KibanaNavLinks,
-  SecurityGroup,
-} from './collapsable_nav_list';
+import { DeploymentsGroup, KibanaNavLinks, SecurityGroup } from "./collapsable_nav_list";
 
-import { HeaderSpacesMenu } from './header_spaces_menu';
+import { HeaderSpacesMenu } from "./header_spaces_menu";
 
-import HeaderUpdates from './header_updates';
+import HeaderUpdates from "./header_updates";
 
-export const ThemeContext = React.createContext('dark');
+export const ThemeContext = React.createContext("dark");
 
-if (localStorage.getItem('theme') === 'dark') {
-  require('../../themes/theme_dark.scss');
+if (localStorage.getItem("theme") === "dark") {
+  require("../../themes/theme_dark.scss");
 } else {
-  require('../../themes/theme_light.scss');
+  require("../../themes/theme_light.scss");
 }
 
 const TopLinks: EuiPinnableListGroupItemProps[] = [
   {
-    label: 'Home',
-    iconType: 'home',
+    label: "Home",
+    iconType: "home",
     isActive: true,
-    'aria-current': true,
-    href: '#/navigation/collapsible-nav',
+    "aria-current": true,
+    href: "#/navigation/collapsible-nav",
     pinnable: false,
   },
 ];
 
-const KibanaLinks: EuiPinnableListGroupItemProps[] = KibanaNavLinks.map(
-  (link: any) => {
-    return {
-      ...link,
-      href: '#/navigation/collapsible-nav',
-    };
-  }
-);
+const KibanaLinks: EuiPinnableListGroupItemProps[] = KibanaNavLinks.map((link: any) => {
+  return {
+    ...link,
+    href: "#/navigation/collapsible-nav",
+  };
+});
 
 const LearnLinks: EuiPinnableListGroupItemProps[] = [
-  { label: 'Docs', href: '#/navigation/collapsible-nav' },
-  { label: 'Blogs', href: '#/navigation/collapsible-nav' },
-  { label: 'Webinars', href: '#/navigation/collapsible-nav' },
-  { label: 'Elastic.co', href: 'https://elastic.co' },
+  { label: "Docs", href: "#/navigation/collapsible-nav" },
+  { label: "Blogs", href: "#/navigation/collapsible-nav" },
+  { label: "Webinars", href: "#/navigation/collapsible-nav" },
+  { label: "Elastic.co", href: "https://elastic.co" },
 ];
 
 export const Chrome = ({ children }: any) => {
-  const initialTheme =
-    localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+  const initialTheme = localStorage.getItem("theme") === "dark" ? "dark" : "light";
   const [themeIsLoading, setThemeIsLoading] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [theme, setTheme] = useState(initialTheme);
-  document.body.classList.add('euiBody--headerIsFixed--double');
+  document.body.classList.add("euiBody--headerIsFixed--double");
 
   useEffect(() => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === "light" ? "dark" : "light";
     return () => {
       // Clean up the subscription
-      localStorage.setItem('theme', newTheme);
+      localStorage.setItem("theme", newTheme);
       setThemeIsLoading(true);
       window.location.reload();
     };
@@ -91,29 +84,26 @@ export const Chrome = ({ children }: any) => {
 
   const breadcrumbs = [
     {
-      text: 'Management',
-      href: '#',
+      text: "Management",
+      href: "#",
     },
     {
-      text: 'Users',
+      text: "Users",
     },
   ];
 
   const [navIsOpen, setNavIsOpen] = useState(
-    JSON.parse(String(localStorage.getItem('navIsDocked'))) || false
+    JSON.parse(String(localStorage.getItem("navIsDocked"))) || false
   );
   const [navIsDocked, setNavIsDocked] = useState(
-    JSON.parse(String(localStorage.getItem('navIsDocked'))) || false
+    JSON.parse(String(localStorage.getItem("navIsDocked"))) || false
   );
 
   /**
    * Accordion toggling
    */
   const [openGroups, setOpenGroups] = useState(
-    JSON.parse(String(localStorage.getItem('openNavGroups'))) || [
-      'Kibana',
-      'Learn',
-    ]
+    JSON.parse(String(localStorage.getItem("openNavGroups"))) || ["Kibana", "Learn"]
   );
 
   const toggleAccordion = (isOpen: boolean, title?: string) => {
@@ -129,11 +119,11 @@ export const Chrome = ({ children }: any) => {
       }
     }
     setOpenGroups([...openGroups]);
-    localStorage.setItem('openNavGroups', JSON.stringify(openGroups));
+    localStorage.setItem("openNavGroups", JSON.stringify(openGroups));
   };
-  /** Pinning */ const [pinnedItems, setPinnedItems] = useState<
-    EuiPinnableListGroupItemProps[]
-  >(JSON.parse(String(localStorage.getItem('pinnedItems'))) || []);
+  /** Pinning */ const [pinnedItems, setPinnedItems] = useState<EuiPinnableListGroupItemProps[]>(
+    JSON.parse(String(localStorage.getItem("pinnedItems"))) || []
+  );
   const addPin = (item: any) => {
     if (!item || _.find(pinnedItems, { label: item.label })) {
       return;
@@ -141,7 +131,7 @@ export const Chrome = ({ children }: any) => {
     item.pinned = true;
     const newPinnedItems = pinnedItems ? pinnedItems.concat(item) : [item];
     setPinnedItems(newPinnedItems);
-    localStorage.setItem('pinnedItems', JSON.stringify(newPinnedItems));
+    localStorage.setItem("pinnedItems", JSON.stringify(newPinnedItems));
   };
 
   const removePin = (item: any) => {
@@ -151,7 +141,7 @@ export const Chrome = ({ children }: any) => {
       const newPinnedItems = pinnedItems;
       newPinnedItems.splice(pinIndex, 1);
       setPinnedItems([...newPinnedItems]);
-      localStorage.setItem('pinnedItems', JSON.stringify(newPinnedItems));
+      localStorage.setItem("pinnedItems", JSON.stringify(newPinnedItems));
     }
   };
 
@@ -186,7 +176,7 @@ export const Chrome = ({ children }: any) => {
         <EuiHeaderSectionItemButton
           aria-label="Toggle main navigation"
           onClick={() => setNavIsOpen(!navIsOpen)}>
-          <EuiIcon type={'menu'} size="m" aria-hidden="true" />
+          <EuiIcon type={"menu"} size="m" aria-hidden="true" />
         </EuiHeaderSectionItemButton>
       }
       onClose={() => setNavIsOpen(false)}>
@@ -200,7 +190,7 @@ export const Chrome = ({ children }: any) => {
         <EuiCollapsibleNavGroup
           background="light"
           className="eui-yScroll"
-          style={{ maxHeight: '40vh' }}>
+          style={{ maxHeight: "40vh" }}>
           <EuiPinnableListGroup
             aria-label="Pinned links" // A11y : Since this group doesn't have a visible `title` it should be provided an accessible description
             listItems={alterLinksWithCurrentState(TopLinks).concat(
@@ -225,8 +215,8 @@ export const Chrome = ({ children }: any) => {
           title="Kibana"
           iconType="logoKibana"
           isCollapsible={true}
-          initialIsOpen={openGroups.includes('Kibana')}
-          onToggle={(isOpen: boolean) => toggleAccordion(isOpen, 'Kibana')}>
+          initialIsOpen={openGroups.includes("Kibana")}
+          onToggle={(isOpen: boolean) => toggleAccordion(isOpen, "Kibana")}>
           <EuiPinnableListGroup
             aria-label="Kibana" // A11y : EuiCollapsibleNavGroup can't correctly pass the `title` as the `aria-label` to the right HTML element, so it must be added manually
             listItems={alterLinksWithCurrentState(KibanaLinks)}
@@ -247,8 +237,8 @@ export const Chrome = ({ children }: any) => {
           title="Learn"
           iconType="training"
           isCollapsible={true}
-          initialIsOpen={openGroups.includes('Learn')}
-          onToggle={(isOpen: boolean) => toggleAccordion(isOpen, 'Learn')}>
+          initialIsOpen={openGroups.includes("Learn")}
+          onToggle={(isOpen: boolean) => toggleAccordion(isOpen, "Learn")}>
           <EuiPinnableListGroup
             aria-label="Learn" // A11y : EuiCollapsibleNavGroup can't correctly pass the `title` as the `aria-label` to the right HTML element, so it must be added manually
             listItems={alterLinksWithCurrentState(LearnLinks)}
@@ -262,20 +252,17 @@ export const Chrome = ({ children }: any) => {
         </EuiCollapsibleNavGroup>
 
         {/* Docking button only for larger screens that can support it*/}
-        <EuiShowFor sizes={['l', 'xl']}>
+        <EuiShowFor sizes={["l", "xl"]}>
           <EuiCollapsibleNavGroup>
             <EuiListGroupItem
               size="xs"
               color="subdued"
-              label={`${navIsDocked ? 'Undock' : 'Dock'} navigation`}
+              label={`${navIsDocked ? "Undock" : "Dock"} navigation`}
               onClick={() => {
                 setNavIsDocked(!navIsDocked);
-                localStorage.setItem(
-                  'navIsDocked',
-                  JSON.stringify(!navIsDocked)
-                );
+                localStorage.setItem("navIsDocked", JSON.stringify(!navIsDocked));
               }}
-              iconType={navIsDocked ? 'lock' : 'lockOpen'}
+              iconType={navIsDocked ? "lock" : "lockOpen"}
             />
           </EuiCollapsibleNavGroup>
         </EuiShowFor>
@@ -290,10 +277,8 @@ export const Chrome = ({ children }: any) => {
         position="fixed"
         sections={[
           {
-            items: [
-              <EuiHeaderLogo iconType="logoElastic">Elastic</EuiHeaderLogo>,
-            ],
-            borders: 'none',
+            items: [<EuiHeaderLogo iconType="logoElastic">DXLab</EuiHeaderLogo>],
+            borders: "none",
           },
           {
             items: [
@@ -302,7 +287,7 @@ export const Chrome = ({ children }: any) => {
                   <EuiHeaderSectionItemButton
                     aria-label="Account menu"
                     onClick={() => setIsAccountOpen(!isAccountOpen)}>
-                    <EuiAvatar name="John Username" size="s" />
+                    <EuiAvatar name="DX" size="s" />
                   </EuiHeaderSectionItemButton>
                 }
                 isOpen={isAccountOpen}
@@ -311,16 +296,14 @@ export const Chrome = ({ children }: any) => {
                   <EuiButton
                     size="s"
                     iconType="invert"
-                    onClick={() =>
-                      setTheme(theme === 'light' ? 'dark' : 'light')
-                    }
+                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                     isLoading={themeIsLoading}>
                     Switch Theme
                   </EuiButton>
                 </div>
               </EuiPopover>,
             ],
-            borders: 'none',
+            borders: "none",
           },
         ]}
       />
@@ -330,11 +313,11 @@ export const Chrome = ({ children }: any) => {
           {
             items: [collapsibleNav, <HeaderSpacesMenu />],
             breadcrumbs: breadcrumbs,
-            borders: 'right',
+            borders: "right",
           },
           {
             items: [<HeaderUpdates />],
-            borders: 'none',
+            borders: "none",
           },
         ]}
       />
