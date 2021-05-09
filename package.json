@@ -12,6 +12,7 @@
     "@elastic/eslint-config-kibana": "^0.15.0",
     "@elastic/eui": "^27.3.0",
     "@types/enzyme": "^3.10.3",
+    "axios": "^0.21.1",
     "enzyme": "^3.10.0",
     "eslint-plugin-json": "^1.4.0",
     "gatsby": "^2.19.10",
