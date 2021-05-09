@@ -57,7 +57,7 @@ export const HeaderSpacesMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const isListExtended = () => {
-    return spaces.length > 4 ? true : false;
+    return spaces.length > 4;
   };
 
   const onMenuButtonClick = () => {
