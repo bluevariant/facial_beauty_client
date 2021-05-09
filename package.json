@@ -2,7 +2,7 @@
   "name": "gatsby-eui-starter",
   "private": true,
   "description": "Start building Kibana protoypes quickly with the Gatsby EUI Starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Davey Holler <davey.holler@elastic.co>",
   "dependencies": {
     "@elastic/app-search-javascript": "^7.3.0",
