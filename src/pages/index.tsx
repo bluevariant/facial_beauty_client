@@ -45,16 +45,14 @@ export default () => (
         <EuiPageContentBody>
           <EuiText>
             <p>
-              This Gatsby EUI Starter is intended to help you quickly build and
-              deploy prototypes for Kibana apps with the EUI library.
+              This Gatsby EUI Starter is intended to help you quickly build and deploy prototypes
+              for Kibana apps with the EUI library.
             </p>
             <h3>Clone the project</h3>
             <p>
               To use this starter, simply run{' '}
-              <EuiCode>
-                gatsby new my-app https://github.com/elastic/gatsby-eui-starter
-              </EuiCode>
-              . Then <EuiCode>cd my-app</EuiCode> and start editing.
+              <EuiCode>gatsby new my-app https://github.com/elastic/gatsby-eui-starter</EuiCode>.
+              Then <EuiCode>cd my-app</EuiCode> and start editing.
             </p>
             <h3>Running locally</h3>
             <p>
@@ -62,8 +60,8 @@ export default () => (
             </p>
             <h3>Deploying</h3>
             <p>
-              Make sure that your repo has a <EuiCode>gh-pages</EuiCode> branch
-              setup and that Github Pages is enabled in settings.
+              Make sure that your repo has a <EuiCode>gh-pages</EuiCode> branch setup and that
+              Github Pages is enabled in settings.
             </p>
             <p>
               <EuiCode>yarn deploy</EuiCode>
