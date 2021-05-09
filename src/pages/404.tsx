@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
-import { Link } from 'gatsby';
-
-import { EuiEmptyPrompt, EuiButton } from '@elastic/eui';
+import React, { Fragment } from "react";
+import { Link } from "gatsby";
+import { EuiEmptyPrompt, EuiButton } from "@elastic/eui";
 
 const NotFoundPage = () => (
   <EuiEmptyPrompt
