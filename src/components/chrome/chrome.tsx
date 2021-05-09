@@ -88,7 +88,7 @@ export const Chrome = ({ children }: any) => {
       href: "#",
     },
     {
-      text: "Users",
+      text: "Facial Beauty",
     },
   ];
 
