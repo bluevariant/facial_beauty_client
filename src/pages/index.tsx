@@ -3,6 +3,8 @@ import MyComponent from "../components/my_component";
 import {
   EuiButton,
   EuiCode,
+  EuiFlyoutFooter,
+  EuiIcon,
   EuiPage,
   EuiPageBody,
   EuiPageContent,
@@ -11,6 +13,7 @@ import {
   EuiPageContentHeaderSection,
   EuiPageHeader,
   EuiPageHeaderSection,
+  EuiSpacer,
   EuiText,
   EuiTitle,
 } from "@elastic/eui";
@@ -18,55 +21,43 @@ import {
 export default () => (
   <EuiPage restrictWidth>
     <EuiPageBody>
-      <EuiPageHeader>
-        <EuiPageHeaderSection>
-          <EuiTitle size="l">
-            <h1>Elastic&apos;s Gatsby EUI Starter</h1>
-          </EuiTitle>
-        </EuiPageHeaderSection>
-        <EuiPageHeaderSection>
-          <EuiButton
-            iconType="logoGithub"
-            href="https://github.com/elastic/gatsby-eui-starter"
-            fill>
-            Open in Github
-          </EuiButton>
-        </EuiPageHeaderSection>
-      </EuiPageHeader>
+      {/*<EuiPageHeader>*/}
+      {/*  <EuiPageHeaderSection>*/}
+      {/*    <EuiTitle size="l">*/}
+      {/*      <h1>Face shaming:)</h1>*/}
+      {/*    </EuiTitle>*/}
+      {/*  </EuiPageHeaderSection>*/}
+      {/*</EuiPageHeader>*/}
       <EuiPageContent>
         <EuiPageContentHeader>
           <EuiPageContentHeaderSection>
             <EuiTitle>
-              <h2>Getting started</h2>
+              <h2>Chấm điểm khuôn mặt</h2>
             </EuiTitle>
           </EuiPageContentHeaderSection>
           <EuiPageContentHeaderSection />
         </EuiPageContentHeader>
         <EuiPageContentBody>
+          <EuiSpacer />
           <EuiText>
             <p>
-              This Gatsby EUI Starter is intended to help you quickly build and deploy prototypes
-              for Kibana apps with the EUI library.
-            </p>
-            <h3>Clone the project</h3>
-            <p>
-              To use this starter, simply run{" "}
-              <EuiCode>gatsby new my-app https://github.com/elastic/gatsby-eui-starter</EuiCode>.
-              Then <EuiCode>cd my-app</EuiCode> and start editing.
-            </p>
-            <h3>Running locally</h3>
-            <p>
-              <EuiCode>gatsby develop</EuiCode>
-            </p>
-            <h3>Deploying</h3>
-            <p>
-              Make sure that your repo has a <EuiCode>gh-pages</EuiCode> branch setup and that
-              Github Pages is enabled in settings.
+              <EuiIcon type="alert" /> Dự án có phần toxic nhưng mục đích là mang tính vui nhộn, kết
+              quả không mang tính <span style={{ textDecoration: "line-through" }}>chính xác</span>{" "}
+              cũng như không cổ súy face shaming.
             </p>
             <p>
-              <EuiCode>yarn deploy</EuiCode>
+              Database:
+              <pre>
+                {`
+@article{liang2017SCUT,
+  title     = {SCUT-FBP5500: A Diverse Benchmark Dataset for Multi-Paradigm Facial Beauty Prediction},
+  author    = {Liang, Lingyu and Lin, Luojun and Jin, Lianwen and Xie, Duorui and Li, Mengru},
+  jurnal    = {ICPR},
+  year      = {2018}
+}
+                `.trim()}
+              </pre>
             </p>
-            <MyComponent />
           </EuiText>
         </EuiPageContentBody>
       </EuiPageContent>
