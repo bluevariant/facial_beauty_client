@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import {
   EuiHeaderSectionItemButton,
@@ -9,53 +9,51 @@ import {
   EuiPopoverTitle,
   EuiPopoverFooter,
   htmlIdGenerator,
-} from '@elastic/eui';
+} from "@elastic/eui";
 
 export const HeaderSpacesMenu = () => {
   const id = htmlIdGenerator()();
   const spacesValues = [
     {
-      label: 'Sales team',
+      label: "Sales team",
       prepend: <EuiAvatar type="space" name="Sales Team" size="s" />,
-      checked: 'on',
+      checked: "on",
     },
     {
-      label: 'Engineering',
+      label: "Engineering",
       prepend: <EuiAvatar type="space" name="Engineering" size="s" />,
     },
     {
-      label: 'Security',
+      label: "Security",
       prepend: <EuiAvatar type="space" name="Security" size="s" />,
     },
     {
-      label: 'Default',
+      label: "Default",
       prepend: <EuiAvatar type="space" name="Default" size="s" />,
     },
   ];
 
   const additionalSpaces = [
     {
-      label: 'Sales team 2',
+      label: "Sales team 2",
       prepend: <EuiAvatar type="space" name="Sales Team 2" size="s" />,
     },
     {
-      label: 'Engineering 2',
+      label: "Engineering 2",
       prepend: <EuiAvatar type="space" name="Engineering 2" size="s" />,
     },
     {
-      label: 'Security 2',
+      label: "Security 2",
       prepend: <EuiAvatar type="space" name="Security 2" size="s" />,
     },
     {
-      label: 'Default 2',
+      label: "Default 2",
       prepend: <EuiAvatar type="space" name="Default 2" size="s" />,
     },
   ];
 
   const [spaces, setSpaces] = useState(spacesValues);
-  const [selectedSpace, setSelectedSpace] = useState(
-    spaces.filter(option => option.checked)[0]
-  );
+  const [selectedSpace, setSelectedSpace] = useState(spaces.filter(option => option.checked)[0]);
   const [isOpen, setIsOpen] = useState(false);
 
   const isListExtended = () => {
@@ -103,7 +101,7 @@ export const HeaderSpacesMenu = () => {
       <EuiSelectable
         searchable={isListExtended()}
         searchProps={{
-          placeholder: 'Find a space',
+          placeholder: "Find a space",
           compressed: true,
         }}
         // @ts-ignore
@@ -117,14 +115,10 @@ export const HeaderSpacesMenu = () => {
         }}>
         {(list, search) => (
           <>
-            <EuiPopoverTitle>{search || 'Your spaces'}</EuiPopoverTitle>
+            <EuiPopoverTitle>{search || "Your spaces"}</EuiPopoverTitle>
             {list}
             <EuiPopoverFooter>
-              <EuiButton
-                size="s"
-                fullWidth
-                onClick={addMoreSpaces}
-                disabled={isListExtended()}>
+              <EuiButton size="s" fullWidth onClick={addMoreSpaces} disabled={isListExtended()}>
                 Add more spaces
               </EuiButton>
             </EuiPopoverFooter>
