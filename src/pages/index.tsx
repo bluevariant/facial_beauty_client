@@ -1,5 +1,5 @@
-import React from 'react';
-import MyComponent from '../components/my_component';
+import React from "react";
+import MyComponent from "../components/my_component";
 import {
   EuiButton,
   EuiCode,
@@ -13,7 +13,7 @@ import {
   EuiPageHeaderSection,
   EuiText,
   EuiTitle,
-} from '@elastic/eui';
+} from "@elastic/eui";
 
 export default () => (
   <EuiPage restrictWidth>
@@ -50,7 +50,7 @@ export default () => (
             </p>
             <h3>Clone the project</h3>
             <p>
-              To use this starter, simply run{' '}
+              To use this starter, simply run{" "}
               <EuiCode>gatsby new my-app https://github.com/elastic/gatsby-eui-starter</EuiCode>.
               Then <EuiCode>cd my-app</EuiCode> and start editing.
             </p>
