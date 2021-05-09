@@ -277,7 +277,11 @@ export const Chrome = ({ children }: any) => {
         position="fixed"
         sections={[
           {
-            items: [<EuiHeaderLogo iconType="logoElastic">DXLab</EuiHeaderLogo>],
+            items: [
+              <EuiHeaderLogo href={"https://github.com/bluevariant"} iconType="logoElastic">
+                DXLab
+              </EuiHeaderLogo>,
+            ],
             borders: "none",
           },
           {
