@@ -24,7 +24,7 @@ import {
 } from "@elastic/eui";
 import axios from "axios";
 
-const API_ENDPOINT = "https://52892d838c85.ngrok.io";
+const API_ENDPOINT = "https://temp.dongnv.dev/v1/graphql";
 
 export default () => {
   const [isBigParent, setIsBigParent] = useState(false);
@@ -32,6 +32,7 @@ export default () => {
   const [base64Body, setBase64Body]: any = useState(null);
   const [loading, setLoading]: any = useState(false);
   const [result, setResult]: any = useState(null);
+  const [resultId, setResultId] = useState(0);
 
   const _onSubmit = () => {
     if (!file) {
@@ -65,17 +66,31 @@ export default () => {
 
   useEffect(() => {
     if (base64Body) {
-      axios
-        .post(API_ENDPOINT + "/call", {
-          image_file: base64Body,
-        })
-        .then(({ data }) => {
-          console.log("data", data);
-
-          setResult(data);
-        })
-        .catch(() => alert("Có lỗi xảy ra, vui lòng thử lại!"))
-        .finally(() => setLoading(false));
+      // axios
+      //   .post(API_ENDPOINT + "/call", {
+      //     image_file: base64Body,
+      //   })
+      //   .then(({ data }) => {
+      //     console.log("data", data);
+      //
+      //     setResult(data);
+      //   })
+      //   .catch(() => alert("Có lỗi xảy ra, vui lòng thử lại!"))
+      //   .finally(() => setLoading(false));
+      runQuery(
+        `
+        mutation MyMutation($data: String) {
+          insert_trigger_one(object: {data: $data, type: "FACIAL_BEAUTY_PREDICTION"}) {
+            id
+          }
+        }
+      `,
+        {
+          data: JSON.stringify({ image_file: base64Body }),
+        }
+      ).then(({ data }) => {
+        setResultId(data.data?.insert_trigger_one?.id);
+      });
     }
   }, [base64Body]);
 
@@ -192,3 +207,10 @@ export default () => {
     </>
   );
 };
+
+function runQuery(query: string, variables = {}) {
+  return axios.post(API_ENDPOINT, {
+    query,
+    variables,
+  });
+}
