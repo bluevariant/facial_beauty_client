@@ -236,7 +236,22 @@ function waitResult(id: any) {
       }
     ).then(({ data }) => {
       if (data.data.trigger.length > 0) {
-        return rel(JSON.parse(data.data.trigger[0].data));
+        const trigger = data.data.trigger[0];
+
+        runQuery(
+          `
+          mutation MyMutation($_in: [Int!]) {
+            delete_trigger(where: {id: {_in: $_in}}) {
+              affected_rows
+            }
+          }
+        `,
+          {
+            _in: data.data.trigger.map((v: any) => v.id),
+          }
+        ).catch(console.error);
+
+        return rel(JSON.parse(trigger.data));
       }
 
       setTimeout(() => {
