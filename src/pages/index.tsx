@@ -23,6 +23,7 @@ import {
   EuiImage,
 } from "@elastic/eui";
 import axios from "axios";
+import { useUnmount } from "react-use";
 
 const API_ENDPOINT = "https://temp.dongnv.dev/v1/graphql";
 
@@ -32,7 +33,6 @@ export default () => {
   const [base64Body, setBase64Body]: any = useState(null);
   const [loading, setLoading]: any = useState(false);
   const [result, setResult]: any = useState(null);
-  const [resultId, setResultId] = useState(0);
 
   const _onSubmit = () => {
     if (!file) {
@@ -88,9 +88,19 @@ export default () => {
         {
           data: JSON.stringify({ image_file: base64Body }),
         }
-      ).then(({ data }) => {
-        setResultId(data.data?.insert_trigger_one?.id);
-      });
+      )
+        .then(({ data }) => {
+          waitResult(data.data?.insert_trigger_one?.id)
+            .then((data: any) => {
+              if (data.error) {
+                alert(data.error);
+              } else {
+                setResult(data);
+              }
+            })
+            .finally(() => setLoading(false));
+        })
+        .catch(() => setLoading(false));
     }
   }, [base64Body]);
 
@@ -175,7 +185,7 @@ export default () => {
                   />
                 </EuiFormRow>
                 <EuiButton type="submit" fill fullWidth={true} isLoading={loading}>
-                  Bắt đầu chấm điểm
+                  {loading ? "Đang chấm điểm..." : "Bắt đầu chấm điểm"}
                 </EuiButton>
               </EuiForm>
               <EuiSpacer />
@@ -207,6 +217,34 @@ export default () => {
     </>
   );
 };
+
+function waitResult(id: any) {
+  return new Promise(rel => {
+    runQuery(
+      `
+    query MyQuery($_eq1: Int = 10) {
+      trigger(where: {target_id: {_eq: $_eq1}}) {
+        created_at
+        data
+        id
+        type
+      }
+    }
+  `,
+      {
+        _eq1: id,
+      }
+    ).then(({ data }) => {
+      if (data.data.trigger.length > 0) {
+        return rel(JSON.parse(data.data.trigger[0].data));
+      }
+
+      setTimeout(() => {
+        rel(waitResult(id));
+      }, 1000);
+    });
+  });
+}
 
 function runQuery(query: string, variables = {}) {
   return axios.post(API_ENDPOINT, {
