@@ -1,12 +1,9 @@
-import React from "react";
-import { Link } from "gatsby";
-
+import React, { useEffect } from "react";
 import { EuiPage, EuiPageBody, EuiPageContent, EuiPageContentBody, EuiText } from "@elastic/eui";
-import { useMount } from "react-use";
 import { runQuery } from "./index";
 
 export default () => {
-  useMount(() => {
+  useEffect(() => {
     runQuery(
       `
       mutation MyMutation($value: String) {

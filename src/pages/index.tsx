@@ -20,10 +20,8 @@ import {
   EuiModalBody,
   EuiModalFooter,
   EuiModalHeaderTitle,
-  EuiImage,
 } from "@elastic/eui";
 import axios from "axios";
-import { useUnmount } from "react-use";
 
 export const API_ENDPOINT = "https://temp.dongnv.dev/v1/graphql";
 
