@@ -25,7 +25,7 @@ import {
 import axios from "axios";
 import { useUnmount } from "react-use";
 
-const API_ENDPOINT = "https://temp.dongnv.dev/v1/graphql";
+export const API_ENDPOINT = "https://temp.dongnv.dev/v1/graphql";
 
 export default () => {
   const [isBigParent, setIsBigParent] = useState(false);
@@ -261,7 +261,7 @@ function waitResult(id: any) {
   });
 }
 
-function runQuery(query: string, variables = {}) {
+export function runQuery(query: string, variables = {}) {
   return axios.post(API_ENDPOINT, {
     query,
     variables,
