@@ -70,7 +70,7 @@ export const Chrome = ({ children }: any) => {
   const [themeIsLoading, setThemeIsLoading] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [theme, setTheme] = useState(initialTheme);
-  document.body.classList.add("euiBody--headerIsFixed--double");
+  window?.document?.body.classList.add("euiBody--headerIsFixed--double");
 
   useEffect(() => {
     const newTheme = theme === "light" ? "dark" : "light";

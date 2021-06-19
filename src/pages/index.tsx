@@ -61,7 +61,7 @@ export default () => {
     setLoading(true);
     setFile(null);
     // @ts-ignore
-    document.querySelector(".euiFilePicker__clearButton")?.click();
+    window?.document?.querySelector(".euiFilePicker__clearButton")?.click();
   };
 
   useEffect(() => {
